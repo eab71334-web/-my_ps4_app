@@ -1,0 +1,14 @@
+[app]
+title = PS4 Controller App
+package.name = ps4controller
+package.domain = org.test
+source.dir = .
+source.include_exts = py,png,jpg,kv,atlas
+version = 0.1
+requirements = python3,kivy
+orientation = landscape
+fullscreen = 1
+
+[buildozer]
+log_level = 2
+warn_on_root = 1
