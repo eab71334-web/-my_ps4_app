@@ -19,7 +19,7 @@ source.include_exts = py,png,jpg,kv,atlas
 version = 0.1
 
 # (list) Application requirements
-# تم تحديد pip==23.3.1 لتجنب خطأ BuildDependencyInstallError
+# تم تحديد إصدار pip مستقر وحذف حزمة android لتجنب التعارض
 requirements = python3,kivy,requests,pip==23.3.1
 
 # (str) Supported orientation (one of landscape, sensorLandscape, portrait or all)
@@ -31,7 +31,7 @@ fullscreen = 0
 # (list) Permissions
 android.permissions = INTERNET,READ_EXTERNAL_STORAGE,WRITE_EXTERNAL_STORAGE
 
-# (int) Target Android API, should be as high as possible.
+# (int) Target Android API
 android.api = 33
 
 # (int) Minimum API required
@@ -40,11 +40,14 @@ android.minapi = 21
 # (str) Android NDK version to use
 android.ndk = 25b
 
-# (bool) If True, then skip hosting a local webserver
-android.skip_update = False
+# (str) Android Build Tools version
+# هذا السطر يمنع التحديث التلقائي إلى إصدار Build-Tools 37 غير المستقر
+android.build_tools_version = 33.0.2
+
+# (bool) Accept Android SDK licenses automatically
+android.accept_sdk_license = True
 
 # (list) List of Android architectures to build for
-# تم الاقتصار على معمارية واحدة لمنع التعارض أثناء البناء
 android.archs = arm64-v8a
 
 # (bool) Enable AndroidX support
