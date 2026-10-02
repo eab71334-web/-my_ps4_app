@@ -1,31 +1,36 @@
-name: Build Android APK Fast
+name: Build Flutter APK
 
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
-  workflow_dispatch:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
-
+    runs-on: ubuntu-latest
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+      
+      - name: Set up Java JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '17'
 
-    - name: Build APK using Buildozer Docker
-      uses: addnab/docker-run-action@v3
-      with:
-        image: kivy/buildozer:latest
-        options: -v ${{ github.workspace }}:/home/user/hostroot
-        run: |
-          export BUILDOZER_WARN_ON_ROOT=0
-          buildozer -v android debug -- --arch=arm64-v8a
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.19.x'
+          channel: 'stable'
+          cache: true
 
-    - name: Upload APK Artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: package
-        path: bin/*.apk
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build APK for arm64
+        run: flutter build apk --release --target-platform arm64-v8a
+
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-release
+          path: build/app/outputs/flutter-apk/app-release.apk
