@@ -1,50 +1,54 @@
 [app]
 
 # (str) Title of your application
-title = PS4 Controller App
+title = My PS4 App
 
 # (str) Package name
-package.name = ps4controller
+package.name = my_ps4_app
 
-# (str) Package domain (needed for android/ios packaging)
+# (str) Package domain (needed for android packaging)
 package.domain = org.test
 
 # (str) Source code where the main.py live
 source.dir = .
 
-# (list) Source files to include (process only files with one of the extensions)
+# (list) Source files to include (let empty to include all the files)
 source.include_exts = py,png,jpg,kv,atlas
 
-# (str) Application versioning (method 1)
+# (str) Application versioning
 version = 0.1
 
 # (list) Application requirements
-# comma separated e.g. requirements = sqlite3,kivy
-requirements = python3,kivy,requests
+# تم تحديد pip==23.3.1 لتجنب خطأ BuildDependencyInstallError
+requirements = python3,kivy,requests,pip==23.3.1
 
-# (str) Supported orientations (one of landscape, sensorLandscape, portrait or all)
-orientation = landscape
+# (str) Supported orientation (one of landscape, sensorLandscape, portrait or all)
+orientation = portrait
 
 # (bool) Indicate if the application should be fullscreen or not
-fullscreen = 1
+fullscreen = 0
 
 # (list) Permissions
-android.permissions = INTERNET, READ_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE
+android.permissions = INTERNET,READ_EXTERNAL_STORAGE,WRITE_EXTERNAL_STORAGE
 
 # (int) Target Android API, should be as high as possible.
 android.api = 33
 
-# (int) Minimum API your APK / AAB will support.
+# (int) Minimum API required
 android.minapi = 21
 
 # (str) Android NDK version to use
 android.ndk = 25b
 
-# (bool) If True, then automatically accept SDK license agreements.
-android.accept_sdk_license = True
+# (bool) If True, then skip hosting a local webserver
+android.skip_update = False
 
-# (str) The Android arch to build for, choices: armeabi-v7a, arm64-v8a, x86, x86_64
-android.archs = arm64-v8a, armeabi-v7a
+# (list) List of Android architectures to build for
+# تم الاقتصار على معمارية واحدة لمنع التعارض أثناء البناء
+android.archs = arm64-v8a
+
+# (bool) Enable AndroidX support
+android.androidx = true
 
 [buildozer]
 
