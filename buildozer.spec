@@ -1,13 +1,13 @@
 [app]
 
 # (str) Title of your application
-title = My PS4 App
+title = My PS4 PKG Splitter
 
 # (str) Package name
-package.name = my_ps4_app
+package.name = ps4_pkg_splitter
 
 # (str) Package domain (needed for android packaging)
-package.domain = org.test
+package.domain = org.ps4app
 
 # (str) Source code where the main.py live
 source.dir = .
@@ -16,11 +16,10 @@ source.dir = .
 source.include_exts = py,png,jpg,kv,atlas
 
 # (str) Application versioning
-version = 0.1
+version = 1.0.0
 
 # (list) Application requirements
-# تم تحديد إصدار pip مستقر وحذف حزمة android لتجنب التعارض
-requirements = python3,kivy,requests,pip==23.3.1
+requirements = python3,kivy,requests
 
 # (str) Supported orientation (one of landscape, sensorLandscape, portrait or all)
 orientation = portrait
@@ -29,7 +28,7 @@ orientation = portrait
 fullscreen = 0
 
 # (list) Permissions
-android.permissions = INTERNET,READ_EXTERNAL_STORAGE,WRITE_EXTERNAL_STORAGE
+android.permissions = INTERNET,READ_EXTERNAL_STORAGE,WRITE_EXTERNAL_STORAGE,MANAGE_EXTERNAL_STORAGE
 
 # (int) Target Android API
 android.api = 33
@@ -41,13 +40,12 @@ android.minapi = 21
 android.ndk = 25b
 
 # (str) Android Build Tools version
-# هذا السطر يمنع التحديث التلقائي إلى إصدار Build-Tools 37 غير المستقر
 android.build_tools_version = 33.0.2
 
 # (bool) Accept Android SDK licenses automatically
 android.accept_sdk_license = True
 
-# (list) List of Android architectures to build for
+# (list) List of Android architectures to build for (arm64-v8a هو المعمارية الأسرع للهواتف الحديثة)
 android.archs = arm64-v8a
 
 # (bool) Enable AndroidX support
@@ -59,4 +57,5 @@ android.androidx = true
 log_level = 2
 
 # (int) Display warning if buildozer is run as root (0 = disable, 1 = enable)
-warn_on_root = 1
+# تم ضبط القيمة إلى 0 لمنع توقف عملية البناء داخل Docker عند التشغيل بصلاحيات الجذر
+warn_on_root = 0
